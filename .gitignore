@@ -1,0 +1,12 @@
+# 运行时生成
+.vision.db
+识别汇总报告.md
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# macOS
+.DS_Store
