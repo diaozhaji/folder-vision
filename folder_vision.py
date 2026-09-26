@@ -6,6 +6,7 @@ folder_vision.py — 文件夹图片批量识别流水线
 用法:
     python folder_vision.py <目录> [-p 提示词] [-o 输出md] [--recursive] [--db db路径]
     python folder_vision.py <目录> --summary-only    # 只汇总不识别
+    python folder_vision.py <目录> --base-url http://远程:1234 --model 模型名
     python folder_vision.py <目录> --clear-db        # 清空识别记录(db)后退出
 """
 import argparse
@@ -236,7 +237,17 @@ def main():
     ap.add_argument("--recursive", action="store_true", help="递归子目录")
     ap.add_argument("--summary-only", action="store_true", help="只汇总不识别")
     ap.add_argument("--clear-db", action="store_true", help="清空识别记录(删除db)后退出")
+    ap.add_argument("--base-url", default=None, help="LM Studio地址(默认环境变量FV_LMSTUDIO_BASE或localhost:1234)")
+    ap.add_argument("--model", default=None, help="视觉模型名(默认环境变量FV_MODEL或qwen2.5-vl-7b)")
     args = ap.parse_args()
+
+    # 命令行参数 > 环境变量 > 默认值
+    global LMSTUDIO_URL, MODELS_URL, MODEL
+    if args.base_url:
+        LMSTUDIO_URL = f"{args.base_url.rstrip('/')}/v1/chat/completions"
+        MODELS_URL = f"{args.base_url.rstrip('/')}/v1/models"
+    if args.model:
+        MODEL = args.model
 
     if args.clear_db:
         if args.db:
