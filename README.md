@@ -1,14 +1,3 @@
----
-AIGC:
-  ContentProducer: '001191110102MAD55U9H0F10002'
-  ContentPropagator: '001191110102MAD55U9H0F10002'
-  Label: '1'
-  ProduceID: '0c165fe5-8e79-4860-8c86-ba3b14662e0d'
-  PropagateID: '0c165fe5-8e79-4860-8c86-ba3b14662e0d'
-  ReservedCode1: '9d40fa48-28e0-4d37-930b-4c94d2633572'
-  ReservedCode2: '9d40fa48-28e0-4d37-930b-4c94d2633572'
----
-
 # folder-vision
 
 文件夹图片批量识别流水线：扫描 → 预处理（统一 PNG / 长边压缩）→ 调用本地视觉大模型串行识别 → SQLite 断点续跑 → 汇总报告。
@@ -100,9 +89,3 @@ python folder_vision.py ~/designs --base-url http://192.168.1.100:1234 --model q
 
 - 已识别（`status=done`）的图片会被跳过，不会重复消耗 token
 - 单张失败自动重试 3 次；汇总报告附带失败清单便于排查
-
-## License
-
-[MIT](LICENSE)
-
-> AI生成
