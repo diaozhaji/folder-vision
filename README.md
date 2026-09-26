@@ -3,10 +3,10 @@ AIGC:
   ContentProducer: '001191110102MAD55U9H0F10002'
   ContentPropagator: '001191110102MAD55U9H0F10002'
   Label: '1'
-  ProduceID: '795f1a81-f077-4b45-a90c-988185cbe9f0'
-  PropagateID: '795f1a81-f077-4b45-a90c-988185cbe9f0'
-  ReservedCode1: 'e1ab6d07-1448-4f2d-9d26-c122accea510'
-  ReservedCode2: 'e1ab6d07-1448-4f2d-9d26-c122accea510'
+  ProduceID: '0c165fe5-8e79-4860-8c86-ba3b14662e0d'
+  PropagateID: '0c165fe5-8e79-4860-8c86-ba3b14662e0d'
+  ReservedCode1: '9d40fa48-28e0-4d37-930b-4c94d2633572'
+  ReservedCode2: '9d40fa48-28e0-4d37-930b-4c94d2633572'
 ---
 
 # folder-vision
@@ -46,6 +46,9 @@ python folder_vision.py ~/designs
 # 递归子目录 + 自定义提示词
 python folder_vision.py ~/designs --recursive -p "提取这张图的标题和正文文字"
 
+# 指定远程 LM Studio 地址和模型
+python folder_vision.py ~/designs --base-url http://192.168.1.100:1234 --model qwen2.5-vl-7b
+
 # 只汇总已识别结果（不调用模型）
 python folder_vision.py ~/designs --summary-only
 
@@ -79,6 +82,14 @@ python folder_vision.py ~/designs
 | `--recursive` | 递归扫描子目录 |
 | `--summary-only` | 只汇总不识别 |
 | `--clear-db` | 清空识别记录后退出 |
+| `--base-url` | LM Studio 服务地址（默认环境变量 `FV_LMSTUDIO_BASE` 或 `http://localhost:1234`） |
+| `--model` | 视觉模型名（默认环境变量 `FV_MODEL` 或 `qwen2.5-vl-7b`） |
+
+命令行参数优先级高于环境变量，可混用：
+
+```bash
+python folder_vision.py ~/designs --base-url http://192.168.1.100:1234 --model qwen2.5-vl-7b
+```
 
 ## 工作原理
 
